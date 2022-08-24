@@ -1,6 +1,7 @@
+import { Utils } from '@antv/graphin';
 import { AutoComplete, Input } from 'antd';
 import type { SelectProps } from 'antd/es/select';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GI_LOCAL_DATA } from '../data/GI_DATA';
 import { useGraphData } from '../states/graph_states';
 import setIcons from '../styles/graphine-icons';
@@ -21,7 +22,9 @@ const SearchBar: React.FC = () => {
     // const [value, setValue] = useState('');
     const [options, setOptions]:any = useState([]);
     const {selectedData, setSearch, selectedSearch, setData} = useGraphData()
+    const data1 = Utils.mock(5).circle().graphin();
     const onSearch = (searchText: string) => {
+        console.log("click")
         setOptions(
             getNames(GI_LOCAL_DATA)
         );
@@ -30,7 +33,16 @@ const SearchBar: React.FC = () => {
     const onSelect = (data: string) => {
         console.log('onSelect', data);
         setSearch(data)
-        setData(setIcons())
+        if(data == "account_7"){
+            setData(setIcons())
+        }
+        else if(data == null || data == ''){
+            setData([])
+        }
+        else{
+            setData(data1)
+        }
+        
     };
 
     const onChange = (data: string) => {
@@ -45,6 +57,11 @@ const SearchBar: React.FC = () => {
         setData([])
     };
 
+    const onClick = () => {
+        console.log("click")
+        //setData([])
+    };
+
     return (
         <>
             <AutoComplete
@@ -54,12 +71,13 @@ const SearchBar: React.FC = () => {
                 onSearch={onSearch}
                 onChange={onChange}
                 onClear={onClear}
+                //onClick={onClick}
                 clearIcon = {true}
                 filterOption={(inputValue, option:any) =>
                     option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
             >
-                <Input.Search size="large" placeholder="input here" enterButton />
+                <Input.Search size="large" placeholder="input here" onSearch={onSelect} enterButton/>
             </AutoComplete>
         </>
     );
