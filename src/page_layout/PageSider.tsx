@@ -3,9 +3,10 @@ import {
     FileOutlined,
     PieChartOutlined,
     TeamOutlined,
-    UserOutlined
+    UserOutlined,
+    SearchOutlined
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
+import { Drawer, MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import SearchBar from "../graph_functions/SearchBar"
@@ -27,7 +28,7 @@ function getItem(
 }
 
 const items: any = [
-    getItem("Option 1", "1", <PieChartOutlined />),
+    getItem("Search", "Search", <SearchOutlined />),
     getItem("Option 2", "2", <DesktopOutlined />),
     getItem("User", "sub1", <UserOutlined />, [
         getItem("Tom", "Tom"),
@@ -43,12 +44,24 @@ const items: any = [
 
 const { Sider } = Layout;
 
+
 const PageSider: React.FC = () => {
+    const [visible, setVisible] = useState(false);
+
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClose = () => {
+        setVisible(false);
+    };
     const [collapsed, setCollapsed] = useState(false);
     const [search, setSearch]: any = useState(null)
     const handleClick = (e: { key: unknown }) => {
-        if (e.key == "Tom") {
-            setSearch("hii")
+        if (e.key == "Search") {
+            //setSearch("hii")
+            showDrawer()
+            // <SearchBar />
         }
     };
 
@@ -58,13 +71,16 @@ const PageSider: React.FC = () => {
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
         >
-            <SearchBar/>
+            <Drawer title="Basic Drawer" placement="left" onClose={onClose} visible={visible}>
+                <SearchBar />
+            </Drawer>
             <Menu onClick={handleClick}
                 theme="dark"
                 defaultSelectedKeys={["1"]}
                 mode="inline"
                 items={items}
             />
+
         </Sider>
     );
 };

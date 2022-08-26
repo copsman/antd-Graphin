@@ -1,4 +1,4 @@
-import Graphin from '@antv/graphin';
+import Graphin, { Utils } from '@antv/graphin';
 import { GI_LOCAL_DATA } from "../data/GI_DATA"
 import { ES_DATA } from '../data/ELASTIC_DATA';
 
@@ -13,8 +13,18 @@ const { fontFamily, glyphs } = iconLoader();
 const icons = Graphin.registerFontFamily(iconLoader);
 
 const setIcons: any = () => {
-    console.log(GI_LOCAL_DATA.nodes)
-    GI_LOCAL_DATA.nodes.forEach((node: any) => {
+    const data1 = Utils.mock(5).circle().graphin();
+    const dataV2 = GI_LOCAL_DATA
+    const dataNode = [...GI_LOCAL_DATA.nodes, ...data1.nodes]
+    const dataEdges = [...GI_LOCAL_DATA.edges, ...data1.edges]
+    var dataV3 = {
+        nodes: [...dataNode],
+        edges: [...dataEdges]
+    }
+    console.log(data1)
+    console.log(GI_LOCAL_DATA)
+    console.log(dataV3)
+    dataV3.nodes.forEach((node: any) => {
         if( node.id.includes("customer") ){
             node.style = {
                 label: {
@@ -90,7 +100,7 @@ const setIcons: any = () => {
     });
     //const {setData} = useGraphData()
     //setData(GI_LOCAL_DATA)
-    return GI_LOCAL_DATA
+    return dataV3
 }
 
 export default setIcons

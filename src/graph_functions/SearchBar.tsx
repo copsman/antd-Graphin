@@ -40,7 +40,7 @@ const SearchBar: React.FC = () => {
             setData([])
         }
         else{
-            setData(data1)
+            setData(setIcons())
         }
         
     };
@@ -77,7 +77,7 @@ const SearchBar: React.FC = () => {
                     option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
             >
-                <Input.Search size="large" placeholder="input here" onSearch={onSelect} enterButton/>
+                <Input.Search size="large" placeholder="input here" onSearch={onSelect} allowClear enterButton/>
             </AutoComplete>
         </>
     );
