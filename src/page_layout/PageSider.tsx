@@ -55,7 +55,7 @@ const PageSider: React.FC = () => {
     const onClose = () => {
         setVisible(false);
     };
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const [search, setSearch]: any = useState(null)
     const handleClick = (e: { key: unknown }) => {
         if (e.key == "Search") {

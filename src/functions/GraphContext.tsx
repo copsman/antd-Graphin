@@ -3,10 +3,11 @@ import {GraphinContext } from '@antv/graphin';
 import { useGraphData } from '../states/graph_states';
 
 const GraphContext: React.FC = () => {
-    const [stateData, setStateData]:any = useState(null)
     const {selectedGraphContext,selectedData, setGraphContext, selectedSearch} = useGraphData()
     const {graph} = useContext(GraphinContext)
+    const [stateWidth, setStateWidth]:any = useState(graph.getContainer().clientWidth)
 
+    
         //console.log("render")
         //console.log(graph['cfg']['data'])
         useEffect(() => {
@@ -23,8 +24,13 @@ const GraphContext: React.FC = () => {
         },[graph['cfg']['data']])
 
         useEffect(() => {
+            console.log(stateWidth)
+        }, [stateWidth])
+
+        useEffect(() => {
             //graph.setTextWaterMarker(['AntV', 'G6'])
             if(selectedSearch != null || selectedSearch != ''){
+                graph.changeSize(graph.getContainer().clientWidth, graph.getContainer().clientHeight)
                 graph.refreshPositions()
                 const str:any = "account_7"
                 console.log(graph.findById(selectedSearch))

@@ -5,10 +5,11 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
-    "@antv/graphin": "2.7.3",
+    "@antv/graphin": "2.7.9",
     "@antv/graphin-components": "2.4.0",
     "@antv/graphin-icons": "1.0.0",
     "antd": "4.22.5",
+    "next": "^12.2.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-scripts": "4.0.3",

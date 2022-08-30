@@ -11,16 +11,19 @@ const { Header, Content, Footer } = Layout;
 const App: React.FC = () => {
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+
+
+    <Layout style={{ minHeight: "100vh", maxHeight:"100%", minWidth: "100vh", maxWidth:"100%"}}>
       <PageSider/>
-      <Layout className="site-layout">
+      <Layout style={{ minHeight: "100vh", maxHeight:"100%", minWidth: "100vh", maxWidth:"100%"}} className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: "0 16px" }}>
+        <Content>
           <>
-            <GraphTest></GraphTest>
-            </>
+          <GraphTest></GraphTest>
+          </>
+            {/* <GraphTest></GraphTest> */}
         </Content>
-        <Footer/>
+        {/* <Footer/> */}
       </Layout>
     </Layout>
   );
